@@ -1,7 +1,13 @@
-- name: Sending an e-mail using the remote machine, not the Ansible controller node
-  community.general.mail:
-    host: 192.168.2.6
-    port: 25
-    to: soehrens@gmail.com
-    subject: Ansible-report
-    body: Email {{ ansible_hostname }} has been successfully sent.
+---
+- hosts: all
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: Sending an e-mail using the remote machine, not the Ansible controller node
+      community.general.mail:
+        host: 192.168.2.6
+        port: 25
+        to: soehrens@gmail.com
+        subject: Ansible-report
+        body: Email {{ ansible_hostname }} has been successfully sent.
