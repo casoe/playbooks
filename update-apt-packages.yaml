@@ -36,4 +36,4 @@
         port: 25
         to: carsten@charon
         subject: Ansible-report update-apt-packages {{ ansible_hostname }}
-        body: result.stdout
+        body: result.stdout_lines
