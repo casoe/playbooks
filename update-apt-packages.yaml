@@ -22,3 +22,18 @@
     - name: Remove dependencies that are no longer required.
       ansible.builtin.apt:
         autoremove: yes
+
+    - name: List installed and updated packages
+      shell: grep -E "^$(date +%Y-%m-%d).+ (install|upgrade) " /var/log/dpkg.log |cut -d " " -f 3-5
+      register: result
+    
+    - name: Show Output
+      debug: msg="{{ result.stdout_lines }}"
+
+    - name: Sending an e-mail using the remote machine, not the Ansible controller node
+      community.general.mail:
+        host: 192.168.2.6
+        port: 25
+        to: carsten@charon
+        subject: Ansible-report update-apt-packages {{ ansible_hostname }}
+        body: result.stdout
