@@ -2,6 +2,6 @@
   community.general.mail:
     host: 192.168.2.6
     port: 25
-    to: casoe@gmx.de
+    to: soehrens@gmail.com
     subject: Ansible-report
     body: Email {{ ansible_hostname }} has been successfully sent.
